@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Mixtape Cloud | Official Mixtapes{% endblock %}
+{% block content %}
+<section class="hero">
+  <div>
+    <p class="eyebrow">OFFICIAL DJ WEBSITE</p>
+    <h1>Turn it up.<br><span>Press play.</span></h1>
+    <p class="lead">Listen to the latest DJ Mawats mixtapes, discover new sounds and download your favourites.</p>
+    <a class="btn" href="{{ url_for('mixtapes') }}">Explore Mixtapes</a>
+  </div>
+  <div class="hero-disc">♫</div>
+</section>
+
+<section class="section">
+  <div class="section-head">
+    <h2>Latest Mixtapes</h2>
+    <a href="{{ url_for('mixtapes') }}">View all →</a>
+  </div>
+  {% if mixtapes %}
+  <div class="grid">
+    {% for mix in mixtapes %}
+    <article class="card">
+      {% if mix.cover %}
+        <img class="cover" src="{{ url_for('static', filename='uploads/covers/' + mix.cover) }}" alt="{{ mix.title }}">
+      {% else %}
+        <div class="cover placeholder">♫</div>
+      {% endif %}
+      <div class="card-body">
+        <p class="tag">{{ mix.genre or 'MIXTAPE' }}</p>
+        <h3>{{ mix.title }}</h3>
+        <audio controls preload="none" src="{{ url_for('static', filename='uploads/audio/' + mix.audio) }}"></audio>
+        <a class="download" href="{{ url_for('static', filename='uploads/audio/' + mix.audio) }}" download>Download</a>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+  {% else %}
+    <div class="empty">Your first mixtape will appear here after you upload it.</div>
+  {% endif %}
+</section>
+{% endblock %}

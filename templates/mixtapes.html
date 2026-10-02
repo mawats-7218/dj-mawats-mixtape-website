@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Mixtapes | DJ Mawats{% endblock %}
+{% block content %}
+<section class="page-head">
+  <p class="eyebrow">THE ARCHIVE</p>
+  <h1>Mixtapes</h1>
+  <p>Press play, turn up the volume and enjoy.</p>
+</section>
+<section class="section">
+  {% if mixtapes %}
+  <div class="grid">
+    {% for mix in mixtapes %}
+    <article class="card">
+      {% if mix.cover %}
+        <img class="cover" src="{{ url_for('static', filename='uploads/covers/' + mix.cover) }}" alt="{{ mix.title }}">
+      {% else %}
+        <div class="cover placeholder">♫</div>
+      {% endif %}
+      <div class="card-body">
+        <p class="tag">{{ mix.genre or 'MIXTAPE' }}</p>
+        <h3>{{ mix.title }}</h3>
+        {% if mix.description %}<p class="desc">{{ mix.description }}</p>{% endif %}
+        <audio controls preload="none" src="{{ url_for('static', filename='uploads/audio/' + mix.audio) }}"></audio>
+        <div class="actions">
+          <a class="download" href="{{ url_for('static', filename='uploads/audio/' + mix.audio) }}" download>Download</a>
+          {% if session.get('admin') %}
+          <form method="post" action="{{ url_for('delete_mix', mix_id=mix.id) }}" onsubmit="return confirm('Delete this mixtape?');">
+            <button class="delete">Delete</button>
+          </form>
+          {% endif %}
+        </div>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+  {% else %}
+    <div class="empty">No mixtapes yet. Log in as admin and upload your first one.</div>
+  {% endif %}
+</section>
+{% endblock %}

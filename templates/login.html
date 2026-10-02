@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Admin Login | DJ Mawats{% endblock %}
+{% block content %}
+<section class="form-wrap">
+  <div class="form-card">
+    <p class="eyebrow">PRIVATE AREA</p>
+    <h1>Admin Login</h1>
+    <form method="post">
+      <label>Username<input name="username" required></label>
+      <label>Password<input type="password" name="password" required></label>
+      <button class="btn full" type="submit">Log in</button>
+    </form>
+    <p class="hint">For a live deployment, set ADMIN_USER, ADMIN_PASSWORD and SECRET_KEY as environment variables.</p>
+  </div>
+</section>
+{% endblock %}

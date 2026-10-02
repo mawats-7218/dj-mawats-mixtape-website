@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Upload | DJ Mawats{% endblock %}
+{% block content %}
+<section class="form-wrap">
+  <div class="form-card wide">
+    <p class="eyebrow">DJ DASHBOARD</p>
+    <h1>Upload a Mixtape</h1>
+    <form method="post" enctype="multipart/form-data">
+      <label>Mixtape title
+        <input name="title" placeholder="e.g. Summer Vibes 2026" required>
+      </label>
+      <label>Genre
+        <input name="genre" placeholder="Amapiano / Hip-Hop / House">
+      </label>
+      <label>Description
+        <textarea name="description" rows="4" placeholder="Tell listeners about this mix..."></textarea>
+      </label>
+      <label>Audio file
+        <input type="file" name="audio" accept=".mp3,.wav,.m4a,.ogg" required>
+      </label>
+      <label>Cover artwork
+        <input type="file" name="cover" accept=".jpg,.jpeg,.png,.webp">
+      </label>
+      <button class="btn full" type="submit">Upload Mixtape</button>
+    </form>
+  </div>
+</section>
+{% endblock %}
