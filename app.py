@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, session, abort
+from flask import Flask, render_template, send_from_directory
 from werkzeug.utils import secure_filename
 from pathlib import Path
 import sqlite3, os, uuid
@@ -42,6 +42,10 @@ def init_db():
 
 def allowed(filename, extensions):
     return "." in filename and filename.rsplit(".", 1)[1].lower() in extensions
+
+@app.route("/googlec3007d139a378b35.html")
+def google_verification():
+    return send_from_directory(".", "googlec3007d139a378b35.html")
 
 @app.route("/")
 def home():
